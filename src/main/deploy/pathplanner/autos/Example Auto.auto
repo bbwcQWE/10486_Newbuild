@@ -1,0 +1,55 @@
+{
+  "version": "2025.0",
+  "command": {
+    "type": "sequential",
+    "data": {
+      "commands": [
+        {
+          "type": "path",
+          "data": {
+            "pathName": "First"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "To Coral1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Get Coral1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Score Coral1"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "To Coral2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Get Coral2"
+          }
+        },
+        {
+          "type": "path",
+          "data": {
+            "pathName": "Score Coral2"
+          }
+        }
+      ]
+    }
+  },
+  "resetOdom": true,
+  "folder": null,
+  "choreoAuto": false
+}
