@@ -5,6 +5,7 @@
 package frc.robot.subsystems.Feeder;
 
 import au.grapplerobotics.LaserCan;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class i_LaserCanSubsystem extends SubsystemBase {
@@ -39,5 +40,9 @@ public class i_LaserCanSubsystem extends SubsystemBase {
   @Override
   public void periodic() {
     // This method will be called once per scheduler run
+    double distance = getDistance();
+    boolean isTargetClose = isTargetClose();
+    SmartDashboard.putNumber("i_Laser Distance (mm)", distance);
+    SmartDashboard.putBoolean("i_Is Target Close", isTargetClose);
   }
 }

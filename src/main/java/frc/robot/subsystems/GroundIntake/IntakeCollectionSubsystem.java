@@ -9,6 +9,7 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix6.hardware.TalonFX;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.CollectorConstants;
+import frc.robot.Constants.GroundIntakeConstants;
 
 public class IntakeCollectionSubsystem extends SubsystemBase {
   private final WPI_TalonSRX intakecollectorMidMotor =
@@ -20,6 +21,7 @@ public class IntakeCollectionSubsystem extends SubsystemBase {
   public IntakeCollectionSubsystem() {
     intakecollectorMidMotor.configFactoryDefault();
     intakecollectorMidMotor.setNeutralMode(NeutralMode.Coast);
+    intakecollectorTopMotor.getConfigurator().apply(GroundIntakeConstants.configs);
   }
 
   public void runIntake(double speedMid, double speedTop) {

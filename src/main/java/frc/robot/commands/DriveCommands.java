@@ -26,6 +26,7 @@ import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import frc.robot.subsystems.drive.Drive;
@@ -63,6 +64,36 @@ public class DriveCommands {
         .getTranslation();
   }
 
+  // 无头模式
+  public static Command joystickDriveRobotRelative(
+      Drive drive,
+      DoubleSupplier xSupplier,
+      DoubleSupplier ySupplier,
+      DoubleSupplier omegaSupplier) {
+    return Commands.run(
+        () -> {
+          // Get linear velocity (already robot-relative from getLinearVelocityFromJoysticks)
+          Translation2d linearVelocity =
+              getLinearVelocityFromJoysticks(xSupplier.getAsDouble(), ySupplier.getAsDouble());
+
+          // Apply rotation deadband
+          double omega = MathUtil.applyDeadband(omegaSupplier.getAsDouble(), DEADBAND);
+
+          // Square rotation value for more precise control
+          omega = Math.copySign(omega * omega, omega);
+
+          // Directly create ChassisSpeeds in robot-relative frame
+          // No need for fromFieldRelativeSpeeds or gyro input here
+          ChassisSpeeds speeds =
+              new ChassisSpeeds(
+                  linearVelocity.getX() * drive.getMaxLinearSpeedMetersPerSec(),
+                  linearVelocity.getY() * drive.getMaxLinearSpeedMetersPerSec(),
+                  omega * drive.getMaxAngularSpeedRadPerSec());
+
+          drive.runVelocity(speeds); // 直接运行机器人相对速度
+        },
+        drive);
+  }
   /**
    * Field relative drive command using two joysticks (controlling linear and angular velocities).
    */
@@ -92,6 +123,11 @@ public class DriveCommands {
           boolean isFlipped =
               DriverStation.getAlliance().isPresent()
                   && DriverStation.getAlliance().get() == Alliance.Red;
+
+          SmartDashboard.putBoolean("Is Red Alliance Flipped", isFlipped);
+          SmartDashboard.putString(
+              "Current DS Alliance", DriverStation.getAlliance().orElse(Alliance.Blue).toString());
+          SmartDashboard.putNumber("Raw Gyro Angle (Degrees)", drive.getRotation().getDegrees());
           drive.runVelocity(
               ChassisSpeeds.fromFieldRelativeSpeeds(
                   speeds,

@@ -13,7 +13,7 @@ public class FeederWheelSubsystem extends SubsystemBase {
   private TalonFX FeederWheelMotor = new TalonFX(FeederConstants.FeederWheelMotorId);
   /** Creates a new FeederWheelSubsystem. */
   public FeederWheelSubsystem() {
-    FeederConstants.WheelConfigs.MotorOutput.NeutralMode = NeutralModeValue.Coast;
+    FeederConstants.WheelConfigs.MotorOutput.NeutralMode = NeutralModeValue.Brake;
     FeederWheelMotor.getConfigurator().apply(FeederConstants.WheelConfigs);
     FeederWheelMotor.getConfigurator().apply(FeederConstants.Amperelimit);
   }

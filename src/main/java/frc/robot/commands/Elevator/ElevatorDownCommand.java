@@ -25,7 +25,7 @@ public class ElevatorDownCommand extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    elevatorDown.run(-.2);
+    elevatorDown.run(-.05);
   }
 
   // Called once the command ends or is interrupted.

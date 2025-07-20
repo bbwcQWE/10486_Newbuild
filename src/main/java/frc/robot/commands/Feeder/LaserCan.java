@@ -36,6 +36,6 @@ public class LaserCan extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return laserCanSubsystem.isTargetClose() && !i_laserCanSubsystem.isTargetClose();
+    return laserCanSubsystem.isTargetClose();
   }
 }

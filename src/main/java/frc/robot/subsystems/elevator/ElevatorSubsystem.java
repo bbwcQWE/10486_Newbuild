@@ -112,7 +112,7 @@ public class ElevatorSubsystem extends SubsystemBase {
     SmartDashboard.putNumber("Position", getElevatorPositionRotations());
     //
     //// 2. 电梯当前速度 (以转数/秒 Rotations/sec 为单位)
-    // SmartDashboard.putNumber("Velocity", getElevatorVelocityRotationsPerSec());
+    SmartDashboard.putNumber("Velocity", getElevatorVelocityRotationsPerSec());
     //
     //// 3. 电梯左电机施加的电压 (V)
     // SmartDashboard.putNumber(

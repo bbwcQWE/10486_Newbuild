@@ -54,11 +54,11 @@ public final class Constants {
             .withMotionMagic(
                 new MotionMagicConfigs()
                     .withMotionMagicCruiseVelocity(80)
-                    .withMotionMagicAcceleration(100))
+                    .withMotionMagicAcceleration(130))
             /*电梯的PID */
             .withSlot0(
                 new Slot0Configs()
-                    .withKP(2)
+                    .withKP(3)
                     .withKI(0.05)
                     .withKD(0)
                     .withKS(.04)
@@ -66,14 +66,16 @@ public final class Constants {
                     .withKA(.0038)
                     .withKG(.39));
 
-    public static final double ELEVATOR_POSITION_BOTTOM_ROTATIONS = 1; //
+    public static final double ELEVATOR_POSITION_BOTTOM_ROTATIONS = .7; //
     public static final double ELEVATOR_POSITION_L1_ROTATIONS = 12; //
-    public static final double ELEVATOR_POSITION_L2_ROTATIONS = 18; //
-    public static final double ELEVATOR_POSITION_L3_ROTATIONS = 30.0; //
-    public static final double ELEVATOR_POSITION_L4_ROTATIONS = 42.0; //
+    public static final double ELEVATOR_POSITION_L2_ROTATIONS = 16.9; //
+    public static final double ELEVATOR_POSITION_L3_ROTATIONS = 26.0; //
+    public static final double ELEVATOR_POSITION_L4_ROTATIONS = 43.4; //
     public static final double ELEVATOR_POSITION_Max_ROTATIONS = 44.0; //
+    public static final double ELEVATOR_POSITION_ALGEA_HIGH = 22.0; //
+    public static final double ELEVATOR_POSITION_ALGEA_LOW = 12.0; //
 
-    public static final double ELEVATOR_POSITION_TOLERANCE_ROTATIONS = .2;
+    public static final double ELEVATOR_POSITION_TOLERANCE_ROTATIONS = .02;
   }
   /*地面抓取 */
   public static class GroundIntakeConstants {
@@ -88,12 +90,12 @@ public final class Constants {
     public static final double kI = 0;
     public static final double kD = 0.01;
 
-    public static final double kPositionToleranceCycles = 0.003;
+    public static final double kPositionToleranceCycles = 0.0005;
 
-    public static final double INTAKE_ANGLE_PREPARE = .21; // 预备位置
-    public static final double INTAKE_ANGLE_GROUND = .77; // 地面
-    public static final double INTAKE_ANGLE_GRAB = .29; // L1
-    public static final double INTAKE_ANGLE_DRIVERSTATION = .39;
+    public static final double INTAKE_ANGLE_PREPARE = .30; // 预备位置
+    public static final double INTAKE_ANGLE_GROUND = .86; // 地面
+    public static final double INTAKE_ANGLE_GRAB = .45; // L1
+    public static final double INTAKE_ANGLE_DRIVERSTATION = .55;
 
     public static final double WHEEL_SPEED_OUT = .3; // 轮速，正反转
     public static final double WHEEL_SPEED_IN = .1; //
@@ -122,24 +124,26 @@ public final class Constants {
     public static final double ENCODER_TO_INTAKE_GEAR_RATIO = 2.0;
 
     public static final double kP = 2.7;
-    public static final double kI = 0;
+    public static final double kI = 0.05;
     public static final double kD = 0.00;
 
     public static final double kPositionToleranceCycles = 0.003;
 
     public static final double INTAKE_ANGLE_PREPARE = .77; // 预备位置
-    public static final double INTAKE_ANGLE_SHOOT = .51; //
-    public static final double INTAKE_ANGLE_SHOOT_L4 = .40; //
-    public static final double INTAKE_ANGLE_SHOOT_L1 = .73; //
-    public static final double INTAKE_ANGLE_ALGAE = .38; // 海藻
+    public static final double INTAKE_ANGLE_SHOOT = .55; //
+    public static final double INTAKE_ANGLE_SHOOT_L4 = .34; //
+    public static final double INTAKE_ANGLE_SHOOT_L1 = .51; //
+    public static final double INTAKE_ANGLE_ALGAE = .42; // 海藻
 
     public static final double WHEEL_SPEED_IN = 800; // 进
     public static final double WHEEL_SPEED_OUT = -3000; // 出
     public static final double Wheel_speed_in = .2; // 进
-    public static final double Wheel_speed_out = .1; // 出
+    public static final double Wheel_speed_out = .2; // 出
+    public static final double Wheel_speed_out_Algea = -.8; // 出
+    public static final double Wheel_speed_in_Algea = .5; // 出
 
     /*最大速度 */
-    public static final double Maxspeed = -.3;
+    public static final double Maxspeed = -.15; // .3
 
     public static final CurrentLimitsConfigs Amperelimit =
         new CurrentLimitsConfigs()
