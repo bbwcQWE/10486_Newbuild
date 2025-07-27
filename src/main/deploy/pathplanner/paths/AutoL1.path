@@ -3,29 +3,29 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.096747448979592,
-        "y": 5.8195471938775505
+        "x": 7.125956632653061,
+        "y": 3.849649234693877
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.363156784928619,
-        "y": 5.789316670531284
+        "x": 7.54838997406589,
+        "y": 3.809183007771776
       },
       "isLocked": false,
-      "linkedName": "Coral_1"
+      "linkedName": null
     },
     {
       "anchor": {
-        "x": 1.5624091569767444,
-        "y": 5.80423328488372
+        "x": 6.014158163265306,
+        "y": 3.849649234693877
       },
       "prevControl": {
-        "x": 1.312902374326858,
-        "y": 5.8199293166020345
+        "x": 5.765466344529441,
+        "y": 3.875190951430379
       },
       "nextControl": null,
       "isLocked": false,
-      "linkedName": "Coral_1_Complete"
+      "linkedName": null
     }
   ],
   "rotationTargets": [],
@@ -33,20 +33,31 @@
   "pointTowardsZones": [],
   "eventMarkers": [
     {
-      "name": "RunWheel",
-      "waypointRelativePos": 0.0,
+      "name": "UpCoralIntake_L1",
+      "waypointRelativePos": 0,
       "endWaypointRelativePos": null,
       "command": {
         "type": "named",
         "data": {
-          "name": "RunWheel_Intake"
+          "name": "MoveGroundIntakeL1"
+        }
+      }
+    },
+    {
+      "name": "SocreL1",
+      "waypointRelativePos": 1.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "RunWhheel_IntakeL1"
         }
       }
     }
   ],
   "globalConstraints": {
-    "maxVelocity": 0.5,
-    "maxAcceleration": 3.0,
+    "maxVelocity": 1.0,
+    "maxAcceleration": 4.0,
     "maxAngularVelocity": 540.0,
     "maxAngularAcceleration": 720.0,
     "nominalVoltage": 12.0,
@@ -57,10 +68,10 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": "3L4",
+  "folder": "AutoLineL1",
   "idealStartingState": {
-    "velocity": 1.0,
-    "rotation": -2.726310993906221
+    "velocity": 0,
+    "rotation": 0.0
   },
   "useDefaultConstraints": false
 }

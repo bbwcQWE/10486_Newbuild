@@ -25,9 +25,12 @@ import edu.wpi.first.math.numbers.N3;
 import edu.wpi.first.wpilibj.Alert;
 import edu.wpi.first.wpilibj.Alert.AlertType;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.subsystems.vision.VisionIO.PoseObservation;
 import frc.robot.subsystems.vision.VisionIO.PoseObservationType;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Optional;
 import org.littletonrobotics.junction.Logger;
 
 public class Vision extends SubsystemBase {
@@ -62,6 +65,27 @@ public class Vision extends SubsystemBase {
    */
   public Rotation2d getTargetX(int cameraIndex) {
     return inputs[cameraIndex].latestTargetObservation.tx();
+  }
+
+  public Optional<Pose3d> getTagPose(int tagId) {
+    // 这里的实现会根据你的AprilTagLayout来查找对应的Tag姿态
+    // 假设 aprilTagLayout 是 VisionConstants 中的公共静态变量
+    return VisionConstants.aprilTagLayout.getTagPose(tagId);
+  }
+
+  public List<PoseObservation> getLatestTagObservations() {
+    List<PoseObservation> allObservations = new LinkedList<>();
+    for (VisionIOInputsAutoLogged cameraInputs : inputs) { // 遍历所有摄像头的输入
+      // 检查摄像头是否连接（可选，但推荐）
+      if (cameraInputs.connected) {
+        // 使用正确的字段名：poseObservations（小写p）
+        // 并且确保它不是null，或者在VisionIOInputs中初始化为非null数组
+        if (cameraInputs.poseObservations != null) {
+          allObservations.addAll(Arrays.asList(cameraInputs.poseObservations));
+        }
+      }
+    }
+    return allObservations;
   }
 
   @Override

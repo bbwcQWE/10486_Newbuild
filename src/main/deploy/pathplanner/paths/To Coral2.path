@@ -3,13 +3,13 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 2.946257267441861,
-        "y": 4.184429505813953
+        "x": 3.1488520408163265,
+        "y": 4.170503826530611
       },
       "prevControl": null,
       "nextControl": {
-        "x": 3.7501645108863393,
-        "y": 4.213926787324389
+        "x": 3.4437735296952683,
+        "y": 4.21463656602229
       },
       "isLocked": false,
       "linkedName": "Score_coral1"
@@ -20,8 +20,8 @@
         "y": 4.024999999999999
       },
       "prevControl": {
-        "x": 1.824264231937385,
-        "y": 3.9960603460247404
+        "x": 1.8163864972259625,
+        "y": 3.987340416790805
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,7 +31,30 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "SocreCoral1",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ShootL4"
+        }
+      }
+    },
+    {
+      "name": "DownCoralIntake_Coral2",
+      "waypointRelativePos": 0.6107382550335568,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "MoveGroundIntakeDown"
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 4.0,
     "maxAcceleration": 4.0,
@@ -42,10 +65,10 @@
   },
   "goalEndState": {
     "velocity": 1.0,
-    "rotation": 0.0
+    "rotation": 1.4430825086487338
   },
   "reversed": false,
-  "folder": null,
+  "folder": "3L4",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

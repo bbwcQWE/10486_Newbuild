@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 2.946257267441861,
-        "y": 4.184429505813953
+        "x": 3.1488520408163265,
+        "y": 4.170503826530611
       },
       "prevControl": {
-        "x": 2.7851429824724865,
-        "y": 4.375589614567865
+        "x": 2.9877377558469522,
+        "y": 4.361663935284523
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,7 +31,30 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "UpCoralIntake",
+      "waypointRelativePos": 0.03859060402684564,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "MoveGroundIntakeUp"
+        }
+      }
+    },
+    {
+      "name": "LoadCoral1",
+      "waypointRelativePos": 0.07550335570469796,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Load"
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 4.0,
     "maxAcceleration": 4.0,
@@ -45,7 +68,7 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "3L4",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

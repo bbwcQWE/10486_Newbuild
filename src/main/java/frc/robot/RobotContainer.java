@@ -31,16 +31,15 @@ import frc.robot.Constants.FeederConstants;
 import frc.robot.Constants.GroundIntakeConstants;
 import frc.robot.commands.ClimberCommand;
 import frc.robot.commands.DriveCommands;
-import frc.robot.commands.Elevator.ElevatorDownCommand;
 import frc.robot.commands.Elevator.MoveElevatorCommand;
 import frc.robot.commands.Feeder.FeederWheelCommand;
-import frc.robot.commands.Feeder.LaserCan;
-import frc.robot.commands.Feeder.LaserCan_Not;
 import frc.robot.commands.Feeder.MoveFeederConmand;
 import frc.robot.commands.Feeder.RunFeederWheel;
 import frc.robot.commands.Feeder.StopFeeder;
 import frc.robot.commands.GroundIntake.IntakeWheelCommand;
 import frc.robot.commands.GroundIntake.MoveIntakeCommand;
+import frc.robot.commands.GroundIntake.RunIntakeWheelcommand;
+import frc.robot.commands.GroundIntake.StopHum;
 import frc.robot.commands.IntakeCollectionCommand;
 import frc.robot.generated.TunerConstants;
 import frc.robot.subsystems.Feeder.FeederSubsystem;
@@ -76,7 +75,7 @@ public class RobotContainer {
 
   // Controller
   private final CommandXboxController m_Controller = new CommandXboxController(0);
-  private final CommandXboxController s_Controller = new CommandXboxController(4);
+  private final CommandXboxController s_Controller = new CommandXboxController(2);
 
   // Dashboard inputs
   private final LoggedDashboardChooser<Command> autoChooser;
@@ -181,9 +180,26 @@ public class RobotContainer {
     drive.setDefaultCommand(
         DriveCommands.joystickDriveRobotRelative( // Use the robot-relative command
             drive,
-            () -> -m_Controller.getLeftY(), // Assuming Y-axis is forward/backward
-            () -> -m_Controller.getLeftX(), // Assuming X-axis is left/right
-            () -> -m_Controller.getRightX()));
+            () -> m_Controller.getLeftY(), // Assuming Y-axis is forward/backward
+            () -> m_Controller.getLeftX(), // Assuming X-axis is left/right
+            () -> m_Controller.getRightX()));
+
+    s_Controller
+        .button(5)
+        .onTrue(
+            DriveCommands.joystickDriveRobotRelative(
+                drive,
+                () -> -m_Controller.getLeftY(), // Assuming Y-axis is forward/backward
+                () -> -m_Controller.getLeftX(), // Assuming X-axis is left/right
+                () -> -m_Controller.getRightX()));
+    s_Controller
+        .button(6)
+        .onTrue(
+            DriveCommands.joystickDriveRobotRelative(
+                drive,
+                () -> -s_Controller.getLeftY() * .5, // Assuming Y-axis is forward/backward
+                () -> -s_Controller.getLeftX() * .5, // Assuming X-axis is left/right
+                () -> -s_Controller.getRightX() * .5));
 
     // Switch to X pattern when X button is pressed
     s_Controller.button(8).onTrue(Commands.runOnce(drive::stopWithX, drive));
@@ -206,7 +222,8 @@ public class RobotContainer {
         .whileTrue(
             new SequentialCommandGroup(
                 new ParallelRaceGroup(
-                    new LaserCan(laserCanSubsystem, i_laserCanSubsystem), // LaserCan 命令
+
+                    // LaserCan 命令
                     new RunFeederWheel(feederWheelSubsystem, FeederConstants.Wheel_speed_in),
                     new MoveElevatorCommand(
                         elevatorSubsystem, ElevatorConstants.ELEVATOR_POSITION_BOTTOM_ROTATIONS),
@@ -274,17 +291,7 @@ public class RobotContainer {
 
     m_Controller
         .rightTrigger()
-        .whileTrue(
-            new SequentialCommandGroup(
-                new ParallelRaceGroup(
-                    new RunFeederWheel(feederWheelSubsystem, FeederConstants.Wheel_speed_out),
-                    new LaserCan_Not(laserCanSubsystem),
-                    new SequentialCommandGroup(
-                        new MoveFeederConmand(
-                            feederSubsystem, FeederConstants.INTAKE_ANGLE_PREPARE),
-                        new MoveElevatorCommand(
-                            elevatorSubsystem,
-                            ElevatorConstants.ELEVATOR_POSITION_BOTTOM_ROTATIONS)))));
+        .whileTrue(new RunFeederWheel(feederWheelSubsystem, FeederConstants.Wheel_speed_out));
 
     /*海藻 */
     m_Controller
@@ -331,11 +338,11 @@ public class RobotContainer {
             new ParallelCommandGroup(
                 // 电梯移动到 L4 的命令
                 new MoveElevatorCommand(
-                    elevatorSubsystem, ElevatorConstants.ELEVATOR_POSITION_L4_ROTATIONS),
+                    elevatorSubsystem, ElevatorConstants.ELEVATOR_POSITION_Max_ROTATIONS),
                 // Feeder 移动到 shoot L4 的命令，带条件触发
                 Commands.run(
                     () -> {
-                      if (elevatorSubsystem.getElevatorPositionRotations() > 30) {
+                      if (elevatorSubsystem.getElevatorPositionRotations() > 40) {
                         new ParallelCommandGroup(
                                 new RunFeederWheel(
                                     feederWheelSubsystem, FeederConstants.Wheel_speed_out_Algea))
@@ -343,12 +350,47 @@ public class RobotContainer {
                       }
                     })));
 
+    s_Controller
+        .button(7)
+        .whileTrue(new RunFeederWheel(feederWheelSubsystem, FeederConstants.Wheel_speed_out_Algea));
+
+    s_Controller
+        .leftTrigger()
+        .whileTrue(
+            new RunIntakeWheelcommand(
+                groundIntakeWheelSubsystem, GroundIntakeConstants.WHEEL_SPEED_IN));
+    s_Controller
+        .rightTrigger()
+        .whileTrue(
+            new RunIntakeWheelcommand(
+                groundIntakeWheelSubsystem, GroundIntakeConstants.WHEEL_SPEED_OUT));
+    s_Controller
+        .button(10)
+        .whileTrue(
+            new RunIntakeWheelcommand(
+                groundIntakeWheelSubsystem, GroundIntakeConstants.WHEEL_SPEED_OUT_CORAL));
+    s_Controller.button(9).whileTrue(new StopHum(groundIntakeWheelSubsystem)); // 停止地面抓取轮子
+    s_Controller
+        .button(1)
+        .whileTrue(
+            new MoveIntakeCommand(
+                groundIntakeSubsystem, GroundIntakeConstants.INTAKE_ANGLE_GROUND));
+    s_Controller
+        .button(3)
+        .whileTrue(
+            new MoveIntakeCommand(
+                groundIntakeSubsystem, GroundIntakeConstants.INTAKE_ANGLE_PREPARE));
+    s_Controller
+        .button(4)
+        .whileTrue(
+            new MoveIntakeCommand(groundIntakeSubsystem, GroundIntakeConstants.INTAKE_ANGLE_GRAB));
+
     /*Test键位 */
 
     /*电梯键位 */
     // m_Controller.button(5).whileTrue(new ElevatorUpCommand(elevatorSubsystem));
-    m_Controller.button(6).whileTrue(new ElevatorDownCommand(elevatorSubsystem));
-    elevatorSubsystem.setDefaultCommand(new MoveElevatorCommand(elevatorSubsystem, 0));
+
+    elevatorSubsystem.setDefaultCommand(new MoveElevatorCommand(elevatorSubsystem, .2));
     // feederWheelSubsystem.setDefaultCommand(new StopFeeder(feederSubsystem));
     /*地面抓取键位 */
     m_Controller

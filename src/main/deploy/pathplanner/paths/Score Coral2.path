@@ -3,12 +3,12 @@
   "waypoints": [
     {
       "anchor": {
-        "x": 1.638935319767442,
+        "x": 1.5221938775510204,
         "y": 4.024999999999999
       },
       "prevControl": null,
       "nextControl": {
-        "x": 2.571629887938048,
+        "x": 2.4548884457216267,
         "y": 3.903811125727414
       },
       "isLocked": false,
@@ -16,12 +16,12 @@
     },
     {
       "anchor": {
-        "x": 3.0738008720930234,
-        "y": 3.8273074127906965
+        "x": 3.1339285714285716,
+        "y": 3.8421874999999996
       },
       "prevControl": {
-        "x": 2.037888249476741,
-        "y": 3.9843815807533245
+        "x": 2.0980159488122894,
+        "y": 3.999261667962627
       },
       "nextControl": null,
       "isLocked": false,
@@ -31,7 +31,41 @@
   "rotationTargets": [],
   "constraintZones": [],
   "pointTowardsZones": [],
-  "eventMarkers": [],
+  "eventMarkers": [
+    {
+      "name": "UpCoralIntake",
+      "waypointRelativePos": 0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "MoveGroundIntakeUp"
+        }
+      }
+    },
+    {
+      "name": "LoadCoral2",
+      "waypointRelativePos": 0.20302013422818782,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "Load"
+        }
+      }
+    },
+    {
+      "name": "SocreCoral2",
+      "waypointRelativePos": 1.0,
+      "endWaypointRelativePos": null,
+      "command": {
+        "type": "named",
+        "data": {
+          "name": "ShootL4"
+        }
+      }
+    }
+  ],
   "globalConstraints": {
     "maxVelocity": 4.0,
     "maxAcceleration": 4.0,
@@ -45,7 +79,7 @@
     "rotation": 0.0
   },
   "reversed": false,
-  "folder": null,
+  "folder": "3L4",
   "idealStartingState": {
     "velocity": 0,
     "rotation": 0.0

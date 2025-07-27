@@ -18,6 +18,7 @@ import com.ctre.phoenix6.configs.FeedbackConfigs;
 import com.ctre.phoenix6.configs.MotionMagicConfigs;
 import com.ctre.phoenix6.configs.Slot0Configs;
 import com.ctre.phoenix6.configs.TalonFXConfiguration;
+import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj.RobotBase;
 
 /**
@@ -67,13 +68,13 @@ public final class Constants {
                     .withKG(.39));
 
     public static final double ELEVATOR_POSITION_BOTTOM_ROTATIONS = .7; //
-    public static final double ELEVATOR_POSITION_L1_ROTATIONS = 12; //
-    public static final double ELEVATOR_POSITION_L2_ROTATIONS = 16.9; //
-    public static final double ELEVATOR_POSITION_L3_ROTATIONS = 26.0; //
-    public static final double ELEVATOR_POSITION_L4_ROTATIONS = 43.4; //
+    public static final double ELEVATOR_POSITION_L1_ROTATIONS = 15; //
+    public static final double ELEVATOR_POSITION_L2_ROTATIONS = 14.88; //
+    public static final double ELEVATOR_POSITION_L3_ROTATIONS = 24.90; //
+    public static final double ELEVATOR_POSITION_L4_ROTATIONS = 42.00; //
     public static final double ELEVATOR_POSITION_Max_ROTATIONS = 44.0; //
     public static final double ELEVATOR_POSITION_ALGEA_HIGH = 22.0; //
-    public static final double ELEVATOR_POSITION_ALGEA_LOW = 12.0; //
+    public static final double ELEVATOR_POSITION_ALGEA_LOW = 13.0; //
 
     public static final double ELEVATOR_POSITION_TOLERANCE_ROTATIONS = .02;
   }
@@ -95,10 +96,12 @@ public final class Constants {
     public static final double INTAKE_ANGLE_PREPARE = .30; // 预备位置
     public static final double INTAKE_ANGLE_GROUND = .86; // 地面
     public static final double INTAKE_ANGLE_GRAB = .45; // L1
+    public static final double INTAKE_ANGLE_L1 = .45; // L1
     public static final double INTAKE_ANGLE_DRIVERSTATION = .55;
 
-    public static final double WHEEL_SPEED_OUT = .3; // 轮速，正反转
-    public static final double WHEEL_SPEED_IN = .1; //
+    public static final double WHEEL_SPEED_OUT = .6; // 轮速，正反转
+    public static final double WHEEL_SPEED_IN = .3; //
+    public static final double WHEEL_SPEED_OUT_CORAL = -.3; //
 
     public static final double Maxspeed = .15;
 
@@ -119,7 +122,7 @@ public final class Constants {
     public static final int FeederTurnerMotorID = 16;
     public static final int FeederWheelMotorId = 17;
 
-    public static final int fEncoderId = 9;
+    public static final int fEncoderId = 0;
 
     public static final double ENCODER_TO_INTAKE_GEAR_RATIO = 2.0;
 
@@ -131,7 +134,7 @@ public final class Constants {
 
     public static final double INTAKE_ANGLE_PREPARE = .77; // 预备位置
     public static final double INTAKE_ANGLE_SHOOT = .55; //
-    public static final double INTAKE_ANGLE_SHOOT_L4 = .34; //
+    public static final double INTAKE_ANGLE_SHOOT_L4 = .43; //
     public static final double INTAKE_ANGLE_SHOOT_L1 = .51; //
     public static final double INTAKE_ANGLE_ALGAE = .42; // 海藻
 
@@ -139,8 +142,8 @@ public final class Constants {
     public static final double WHEEL_SPEED_OUT = -3000; // 出
     public static final double Wheel_speed_in = .2; // 进
     public static final double Wheel_speed_out = .2; // 出
-    public static final double Wheel_speed_out_Algea = -.8; // 出
-    public static final double Wheel_speed_in_Algea = .5; // 出
+    public static final double Wheel_speed_out_Algea = -.5; // 出
+    public static final double Wheel_speed_in_Algea = .3; // 出
 
     /*最大速度 */
     public static final double Maxspeed = -.15; // .3
@@ -189,4 +192,46 @@ public final class Constants {
     public static final int intakecollectorMidID = 18;
     public static final int intakecollectorTopID = 19;
   }
+
+  /*视觉 */
+  public static final double ALIGN_X_P = 0.5; // P gain for forward/backward movement (meters)
+  public static final double ALIGN_Y_P = 0.5; // P gain for left/right movement (meters)
+  public static final double ALIGN_ROT_P = 0.5; // P gain for rotation (radians)
+
+  // Alignment setpoints (desired relative position to the target)
+  // These values represent the desired translation (x, y) and rotation (z)
+  // of the robot relative to the AprilTag target.
+  // Adjust these based on your robot's physical design and scoring mechanism.
+  // X_SETPOINT_ALIGN: Desired forward/backward distance from the target (meters).
+  //                   A positive value means the target is in front of the robot.
+  public static final double ALIGN_X_SETPOINT =
+      0.0; // Example: 0.0 meters forward/backward from target
+  // Y_SETPOINT_ALIGN: Desired left/right distance from the target (meters).
+  //                   A positive value means the target is to the right of the robot.
+  //                   This might change based on left/right scoring side.
+  public static final double ALIGN_Y_SETPOINT_RIGHT_SCORE =
+      -0.5; // Example: 0.5 meters to the left of target for right score
+  public static final double ALIGN_Y_SETPOINT_LEFT_SCORE =
+      0.5; // Example: 0.5 meters to the right of target for left score
+  // ROT_SETPOINT_ALIGN: Desired rotation of the robot relative to the target (radians).
+  //                     0.0 means directly facing the target.
+  public static final double ALIGN_ROT_SETPOINT =
+      0.0; // Example: 0.0 radians (facing target directly)
+
+  // Alignment tolerances (how close the robot needs to be to be considered "aligned")
+  public static final double ALIGN_X_TOLERANCE = 0.05; // meters
+  public static final double ALIGN_Y_TOLERANCE = 0.05; // meters
+  public static final double ALIGN_ROT_TOLERANCE =
+      Units.degreesToRadians(2.0); // 2 degrees in radians
+
+  // Timers for alignment stability
+  public static final double ALIGN_DONT_SEE_TAG_WAIT_TIME =
+      0.5; // seconds (how long to wait if no tag is seen)
+  public static final double ALIGN_STABILITY_TIME =
+      0.3; // seconds (how long robot must be at setpoint to be finished)
+
+  // Other constants you might need (from your existing VisionConstants)
+  // 例如，从 VisionConstants 导入 AprilTagFieldLayout
+  // public static final AprilTagFieldLayout APRIL_TAG_LAYOUT =
+  // AprilTagFieldLayout.loadField(AprilTagFields.kDefaultField);
 }

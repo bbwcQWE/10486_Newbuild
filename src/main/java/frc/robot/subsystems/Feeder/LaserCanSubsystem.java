@@ -36,7 +36,7 @@ public class LaserCanSubsystem extends SubsystemBase {
 
   public boolean isTargetClose() {
     LaserCan.Measurement measurement = f_LaserCan.getMeasurement();
-    return measurement != null && measurement.distance_mm < 12;
+    return measurement != null && measurement.distance_mm < 20;
   }
 
   public LaserCan.Measurement getLaserMeasurement() {

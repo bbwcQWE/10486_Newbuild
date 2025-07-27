@@ -2,20 +2,20 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands.Feeder;
+package frc.robot.commands.GroundIntake;
 
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.Feeder.LaserCanSubsystem;
+import frc.robot.subsystems.GroundIntake.GroundIntakeWheelSubsystem;
 
 /* You should consider using the more terse Command factories API instead https://docs.wpilib.org/en/stable/docs/software/commandbased/organizing-command-based.html#defining-commands */
-public class LaserCan_Not extends Command {
-  /** Creates a new LaserCan_Not. */
-  private final LaserCanSubsystem laserCanSubsystem;
+public class StopHum extends Command {
+  /** Creates a new StopHum. */
+  GroundIntakeWheelSubsystem groundIntakeWheelSubsystem;
 
-  public LaserCan_Not(LaserCanSubsystem laserCanSubsystem) {
+  public StopHum(GroundIntakeWheelSubsystem groundIntakeWheelSubsystem) {
     // Use addRequirements() here to declare subsystem dependencies.
-    this.laserCanSubsystem = laserCanSubsystem;
-    addRequirements(laserCanSubsystem);
+    this.groundIntakeWheelSubsystem = groundIntakeWheelSubsystem;
+    addRequirements(this.groundIntakeWheelSubsystem);
   }
 
   // Called when the command is initially scheduled.
@@ -24,7 +24,9 @@ public class LaserCan_Not extends Command {
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
-  public void execute() {}
+  public void execute() {
+    groundIntakeWheelSubsystem.stopSBHumMotor();
+  }
 
   // Called once the command ends or is interrupted.
   @Override
@@ -33,6 +35,6 @@ public class LaserCan_Not extends Command {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return !laserCanSubsystem.isTargetClose();
+    return false;
   }
 }

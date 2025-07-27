@@ -11,6 +11,12 @@
           }
         },
         {
+          "type": "named",
+          "data": {
+            "name": "DownCoralIntake_Coral1"
+          }
+        },
+        {
           "type": "path",
           "data": {
             "pathName": "To Coral1"

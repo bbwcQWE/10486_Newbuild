@@ -19,6 +19,7 @@ public class LaserCan extends Command {
     // Use addRequirements() here to declare subsystem dependencies.
     this.laserCanSubsystem = laserCanSubsystem;
     this.i_laserCanSubsystem = i_lasCanSubsystem;
+    addRequirements(laserCanSubsystem);
   }
 
   // Called when the command is initially scheduled.
