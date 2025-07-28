@@ -178,7 +178,7 @@ public class RobotContainer {
                 () -> -m_Controller.getLeftX(),
                 () -> new Rotation2d()));
     drive.setDefaultCommand(
-        DriveCommands.joystickDriveRobotRelative( // Use the robot-relative command
+        DriveCommands.joystickDrive( // Use the robot-relative command
             drive,
             () -> m_Controller.getLeftY(), // Assuming Y-axis is forward/backward
             () -> m_Controller.getLeftX(), // Assuming X-axis is left/right
@@ -187,7 +187,7 @@ public class RobotContainer {
     s_Controller
         .button(5)
         .onTrue(
-            DriveCommands.joystickDriveRobotRelative(
+            DriveCommands.joystickDrive(
                 drive,
                 () -> -m_Controller.getLeftY(), // Assuming Y-axis is forward/backward
                 () -> -m_Controller.getLeftX(), // Assuming X-axis is left/right
@@ -195,7 +195,7 @@ public class RobotContainer {
     s_Controller
         .button(6)
         .onTrue(
-            DriveCommands.joystickDriveRobotRelative(
+            DriveCommands.joystickDrive(
                 drive,
                 () -> -s_Controller.getLeftY() * .5, // Assuming Y-axis is forward/backward
                 () -> -s_Controller.getLeftX() * .5, // Assuming X-axis is left/right

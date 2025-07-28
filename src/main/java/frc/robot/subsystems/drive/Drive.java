@@ -241,6 +241,21 @@ public class Drive extends SubsystemBase {
     Logger.recordOutput("SwerveStates/SetpointsOptimized", setpointStates);
   }
 
+  public void drive(Translation2d translation, double rotation, boolean fieldRelative) {
+    // Convert translation and rotation to ChassisSpeeds
+    ChassisSpeeds speeds;
+    if (fieldRelative) {
+      speeds =
+          ChassisSpeeds.fromFieldRelativeSpeeds(
+              translation.getX(), translation.getY(), rotation, getRotation());
+    } else {
+      speeds = new ChassisSpeeds(translation.getX(), translation.getY(), rotation);
+    }
+
+    // Run the calculated speeds (automatically handles discretization and desaturation)
+    runVelocity(speeds);
+  }
+
   /** Runs the drive in a straight line with the specified drive output. */
   public void runCharacterization(double output) {
     for (int i = 0; i < 4; i++) {

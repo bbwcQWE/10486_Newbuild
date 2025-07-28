@@ -122,7 +122,7 @@ public final class Constants {
     public static final int FeederTurnerMotorID = 16;
     public static final int FeederWheelMotorId = 17;
 
-    public static final int fEncoderId = 0;
+    public static final int fEncoderId = 6;
 
     public static final double ENCODER_TO_INTAKE_GEAR_RATIO = 2.0;
 
@@ -146,7 +146,7 @@ public final class Constants {
     public static final double Wheel_speed_in_Algea = .3; // 出
 
     /*最大速度 */
-    public static final double Maxspeed = -.15; // .3
+    public static final double Maxspeed = -.0; // .15
 
     public static final CurrentLimitsConfigs Amperelimit =
         new CurrentLimitsConfigs()
@@ -234,4 +234,18 @@ public final class Constants {
   // 例如，从 VisionConstants 导入 AprilTagFieldLayout
   // public static final AprilTagFieldLayout APRIL_TAG_LAYOUT =
   // AprilTagFieldLayout.loadField(AprilTagFields.kDefaultField);
+
+  public static final double X_REEF_ALIGNMENT_P = 3.3;
+  public static final double Y_REEF_ALIGNMENT_P = 3.3;
+  public static final double ROT_REEF_ALIGNMENT_P = 0.058;
+
+  public static final double ROT_SETPOINT_REEF_ALIGNMENT = 0; // Rotation
+  public static final double ROT_TOLERANCE_REEF_ALIGNMENT = 1;
+  public static final double X_SETPOINT_REEF_ALIGNMENT = -0.34; // Vertical pose
+  public static final double X_TOLERANCE_REEF_ALIGNMENT = 0.02;
+  public static final double Y_SETPOINT_REEF_ALIGNMENT = 0.16; // Horizontal pose
+  public static final double Y_TOLERANCE_REEF_ALIGNMENT = 0.02;
+
+  public static final double DONT_SEE_TAG_WAIT_TIME = 1;
+  public static final double POSE_VALIDATION_TIME = 0.3;
 }
