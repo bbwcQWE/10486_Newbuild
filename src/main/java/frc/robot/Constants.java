@@ -194,46 +194,6 @@ public final class Constants {
   }
 
   /*视觉 */
-  public static final double ALIGN_X_P = 0.5; // P gain for forward/backward movement (meters)
-  public static final double ALIGN_Y_P = 0.5; // P gain for left/right movement (meters)
-  public static final double ALIGN_ROT_P = 0.5; // P gain for rotation (radians)
-
-  // Alignment setpoints (desired relative position to the target)
-  // These values represent the desired translation (x, y) and rotation (z)
-  // of the robot relative to the AprilTag target.
-  // Adjust these based on your robot's physical design and scoring mechanism.
-  // X_SETPOINT_ALIGN: Desired forward/backward distance from the target (meters).
-  //                   A positive value means the target is in front of the robot.
-  public static final double ALIGN_X_SETPOINT =
-      0.0; // Example: 0.0 meters forward/backward from target
-  // Y_SETPOINT_ALIGN: Desired left/right distance from the target (meters).
-  //                   A positive value means the target is to the right of the robot.
-  //                   This might change based on left/right scoring side.
-  public static final double ALIGN_Y_SETPOINT_RIGHT_SCORE =
-      -0.5; // Example: 0.5 meters to the left of target for right score
-  public static final double ALIGN_Y_SETPOINT_LEFT_SCORE =
-      0.5; // Example: 0.5 meters to the right of target for left score
-  // ROT_SETPOINT_ALIGN: Desired rotation of the robot relative to the target (radians).
-  //                     0.0 means directly facing the target.
-  public static final double ALIGN_ROT_SETPOINT =
-      0.0; // Example: 0.0 radians (facing target directly)
-
-  // Alignment tolerances (how close the robot needs to be to be considered "aligned")
-  public static final double ALIGN_X_TOLERANCE = 0.05; // meters
-  public static final double ALIGN_Y_TOLERANCE = 0.05; // meters
-  public static final double ALIGN_ROT_TOLERANCE =
-      Units.degreesToRadians(2.0); // 2 degrees in radians
-
-  // Timers for alignment stability
-  public static final double ALIGN_DONT_SEE_TAG_WAIT_TIME =
-      0.5; // seconds (how long to wait if no tag is seen)
-  public static final double ALIGN_STABILITY_TIME =
-      0.3; // seconds (how long robot must be at setpoint to be finished)
-
-  // Other constants you might need (from your existing VisionConstants)
-  // 例如，从 VisionConstants 导入 AprilTagFieldLayout
-  // public static final AprilTagFieldLayout APRIL_TAG_LAYOUT =
-  // AprilTagFieldLayout.loadField(AprilTagFields.kDefaultField);
 
   public static final double X_REEF_ALIGNMENT_P = 3.3;
   public static final double Y_REEF_ALIGNMENT_P = 3.3;
